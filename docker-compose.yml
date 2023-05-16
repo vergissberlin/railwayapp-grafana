@@ -1,0 +1,25 @@
+version: '3.6'
+
+services:
+  grafana:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: grafana-development
+    restart: unless-stopped
+    environment:
+      - TZ=Europe/Amsterdam
+      - GF_DEFAULT_INSTANCE_NAME=my-instance
+      - GF_SECURITY_ADMIN_USER=owner
+      - GF_LOG_MODE=console
+    ports:
+      - 3000:3000
+    volumes:
+      - ./data/grafana:/var/lib/grafana
+    networks:
+      - regenfass
+
+networks:
+  regenfass:
+    name: regenfass
+    driver: bridge
