@@ -1,6 +1,8 @@
 # Grafana for railway.app
 
-Deploy Grafana  Community Edition on railway
+Deploy Grafana  Community Edition on railway with one click.
+
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template/anURAt?referralCode=2_sIT9)
 
 ## ✨ Features
 
