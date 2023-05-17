@@ -1,4 +1,6 @@
-FROM grafana/grafana-oss:latest
+ARG GRAFANA_VERSION=latest
+
+FROM grafana/grafana-oss:${GRAFANA_VERSION}
 
 ENV \
     PORT 3000 \
