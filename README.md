@@ -20,6 +20,8 @@ GF_SECURITY_ADMIN_USER=yourusername
 GF_SECURITY_ADMIN_PASSWORD=yourpassword
 GF_INSTALL_PLUGINS=grafana-piechart-panel,grafana-worldmap-panel,grafana-clock-panel,grafana-simple-json-datasource
 GF_LOG_MODE=console
+GF_VERSION=latest
+PORT=3000
 ```
 
 2. Wait for Build & Deployment to Finish
@@ -27,7 +29,7 @@ GF_LOG_MODE=console
 
 ## 👩‍💻 How to Use
 
-1. When you configure your Grafana connection, use your custom URL as the host but be aware that **the port is 443**! Example: `https://demo-grafana.up.railway.app:443`.
+1. When you configure your Grafana connection, use your custom URL as the host.
 2. Use the token in the environment variables to authenticate
 3. Setup bucket name and organization name in the environment variables
 4. Use grafana version 2.0 or above
