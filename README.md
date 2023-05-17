@@ -16,9 +16,10 @@ Deploy Grafana  Community Edition on railway with one click.
 
 ```bash
 GF_DEFAULT_INSTANCE_NAME=my-instance
-GF_SECURITY_ADMIN_USER=owner
+GF_SECURITY_ADMIN_USER=yourusername
+GF_SECURITY_ADMIN_PASSWORD=yourpassword
+GF_INSTALL_PLUGINS=grafana-piechart-panel,grafana-worldmap-panel,grafana-clock-panel,grafana-simple-json-datasource
 GF_LOG_MODE=console
-PORT=3000 # Don't change this
 ```
 
 2. Wait for Build & Deployment to Finish
