@@ -34,6 +34,10 @@ PORT=3000
 3. Setup bucket name and organization name in the environment variables
 4. Use grafana version 2.0 or above
 
+## 🪲 Bug Reporting
+
+If you find a bug in CodiMD template for reailway, you can [submit an issue](https://github.com/vergissberlin/railwayhttps://github.com/vergissberlin/railwayapp-codimd/issues/new) to the GitHub Repository. Even better you can submit a Pull Request with a fix.
+
 ## 🐳  Local Development
 
 ```bash
