@@ -1,6 +1,7 @@
 # Grafana for railway.app
 
 Deploy Grafana  Community Edition on railway with one click.
+Grafana is a multi-platform, feature rich metrics dashboard and graph editor for Graphite, InfluxDB & Prometheus. It is most commonly used for visualizing time series data.
 
 [![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template/anURAt?referralCode=2_sIT9)
 
