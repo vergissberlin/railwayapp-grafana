@@ -2,8 +2,26 @@
 
 !/.env
 !/.gitignore
+!/CONTRIBUTING.md
 !/docker-compose.yml
 !/Dockerfile
 !/LICENSE
 !/railwayapp-grafana.png
 !/README.md
+
+# Environment variables
+.env
+
+# Grafana data
+data/grafana/*
+data/plugins/*
+data/backup/*
+
+# Keep directory structure
+!data/grafana/.gitkeep
+!data/plugins/.gitkeep
+!data/backup/.gitkeep
+
+# OS files
+.DS_Store
+Thumbs.db

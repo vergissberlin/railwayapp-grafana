@@ -9,15 +9,32 @@ services:
     restart: unless-stopped
     environment:
       - TZ=Europe/Amsterdam
-      - GF_DEFAULT_INSTANCE_NAME=my-instance
-      - GF_SECURITY_ADMIN_USER=owner
+      - GF_DEFAULT_INSTANCE_NAME=${GF_DEFAULT_INSTANCE_NAME}
+      - GF_SECURITY_ADMIN_USER=${GF_SECURITY_ADMIN_USER}
+      - GF_SECURITY_ADMIN_PASSWORD=${GF_SECURITY_ADMIN_PASSWORD}
       - GF_LOG_MODE=console
+      - GF_INSTALL_PLUGINS=grafana-clock-panel,grafana-simple-json-datasource
     ports:
       - 3000:3000
     volumes:
       - ./data/grafana:/var/lib/grafana
+      - ./data/plugins:/var/lib/grafana/plugins
+      - ./data/backup:/var/lib/grafana/backup
     networks:
       - regenfass
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1G
+        reservations:
+          cpus: '0.5'
+          memory: 512M
 
 networks:
   regenfass:
