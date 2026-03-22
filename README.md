@@ -10,6 +10,14 @@ Grafana is a multi-platform, feature rich metrics dashboard and graph editor for
 * Grafana with automated setup
 * Grafana UI
 * Password Authentication (Set username & password in environment variables)
+* Railway config as code via `railway.toml`
+
+## Production recommendations (Railway)
+
+* Set strong `GF_SECURITY_ADMIN_PASSWORD` in Railway Variables
+* Persist `/var/lib/grafana` with a Railway volume
+* Keep healthcheck path at `/api/health`
+* Restrict plugin list in `GF_INSTALL_PLUGINS` to required plugins only
 
 ## 🐍 How to Deploy
 

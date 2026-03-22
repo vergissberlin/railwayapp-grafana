@@ -2,12 +2,21 @@
 
 !/.env
 !/.gitignore
+!/.dockerignore
+!/.github/
+!/.github/workflows/
+!/.github/workflows/release-please.yml
 !/CONTRIBUTING.md
 !/docker-compose.yml
 !/Dockerfile
 !/LICENSE
 !/railwayapp-grafana.png
 !/README.md
+!/railway.toml
+!/release-please-config.json
+!/.release-please-manifest.json
+!/CHANGELOG.md
+!/version.txt
 
 # Environment variables
 .env
