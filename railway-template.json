@@ -1,0 +1,11 @@
+{
+  "$schema": "https://raw.githubusercontent.com/vergissberlin/railway/main/docs/railway-template.schema.json",
+  "schemaVersion": 1,
+  "project": "railwayapp-grafana",
+  "repo": "vergissberlin/railwayapp-grafana",
+  "displayName": "Grafana",
+  "publishedCode": "grafana",
+  "image": "https://raw.githubusercontent.com/vergissberlin/railwayapp-grafana/main/template-header.svg",
+  "description": "Deploy Grafana dashboards on Railway for metrics and observability.",
+  "workspaceAutomation": false
+}
