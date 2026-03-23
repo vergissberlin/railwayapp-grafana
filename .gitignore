@@ -16,6 +16,7 @@
 !/release-please-config.json
 !/.release-please-manifest.json
 !/CHANGELOG.md
+!/RAILWAY.md
 !/version.txt
 
 # Environment variables

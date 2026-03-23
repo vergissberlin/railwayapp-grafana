@@ -5,6 +5,8 @@ Grafana is a multi-platform, feature rich metrics dashboard and graph editor for
 
 [![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template/anURAt?referralCode=2_sIT9)
 
+Long-form template copy for Railway (description / **Deploy and Host** sections): [RAILWAY.md](RAILWAY.md).
+
 ## ✨ Features
 
 * Grafana with automated setup
