@@ -1,36 +1,10 @@
-/*
-
-!/.env
-!/.gitignore
-!/.dockerignore
-!/.github/
-!/.github/workflows/
-!/.github/workflows/release-please.yml
-!/CONTRIBUTING.md
-!/docker-compose.yml
-!/Dockerfile
-!/LICENSE
-!/railwayapp-grafana.png
-!/README.md
-!/railway.toml
-!/release-please-config.json
-!/.release-please-manifest.json
-!/CHANGELOG.md
-!/RAILWAY.md
-!/version.txt
-
-# Environment variables
 .env
+.env.*
 
 # Grafana data
 data/grafana/*
 data/plugins/*
 data/backup/*
-
-# Keep directory structure
-!data/grafana/.gitkeep
-!data/plugins/.gitkeep
-!data/backup/.gitkeep
 
 # OS files
 .DS_Store
