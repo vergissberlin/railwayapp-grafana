@@ -57,3 +57,6 @@ docker compose up -d
 ```
 
 Connect to http://localhost:3000 use setup username & password from docker-compose file to login to grafana.
+
+<!-- footer -->
+[![Grafana](https://img.shields.io/badge/Grafana-F46800?style=for-the-badge&logo=grafana&logoColor=white)](https://github.com/vergissberlin/railwayapp-grafana)
