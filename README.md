@@ -24,6 +24,30 @@ Long-form template copy for Railway (description / **Deploy and Host** sections)
 * Keep healthcheck path at `/api/health`
 * Restrict plugin list in `GF_INSTALL_PLUGINS` to required plugins only
 
+## 💾 Volume permissions
+
+Railway mounts volumes as `root:root`, while the upstream Grafana image runs as
+UID 472. A plain `grafana/grafana-oss` deployment therefore fails on first boot
+with:
+
+```log
+mkdir: can't create directory '/var/lib/grafana/plugins': Permission denied
+GF_PATHS_DATA='/var/lib/grafana' is not writable.
+```
+
+This template handles it in [`docker-entrypoint.sh`](docker-entrypoint.sh): the
+container starts as root, takes ownership of the mount, and then `exec`s into
+UID 472. Since it is an `exec` rather than a fork, no root process survives into
+runtime — the Grafana process itself stays unprivileged.
+
+You do **not** need to set `RAILWAY_RUN_UID=0`. That variable is the common
+workaround for this class of error, but it leaves Grafana running as root for the
+entire lifetime of the container.
+
+The recursive `chown` only runs when the mount root is still misowned, so it
+costs one pass on the first boot after attaching a volume and nothing on
+subsequent restarts.
+
 ## 🐍 How to Deploy
 
 1. Click Deploy on Railway and setup your credentials in the environment variables

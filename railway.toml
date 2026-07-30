@@ -2,7 +2,8 @@
 builder = "DOCKERFILE"
 
 [deploy]
-startCommand = "sh -c 'export GF_SERVER_HTTP_PORT=${PORT:-3000}; /run.sh'"
+# No startCommand: the image entrypoint maps PORT to GF_SERVER_HTTP_PORT and
+# prepares the volume mount before starting Grafana. See docker-entrypoint.sh.
 healthcheckPath = "/api/health"
 healthcheckTimeout = 300
 restartPolicyType = "ON_FAILURE"
