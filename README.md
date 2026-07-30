@@ -48,6 +48,29 @@ The recursive `chown` only runs when the mount root is still misowned, so it
 costs one pass on the first boot after attaching a volume and nothing on
 subsequent restarts.
 
+## 🖼️ Image rendering (`grafana-image-renderer`)
+
+Adding `grafana-image-renderer` to `GF_INSTALL_PLUGINS` does **not** work on the
+default image and fails at startup with `exit status 127`:
+
+```log
+Error: ✗ *rendering.RenderingService run error: Unrecognized remote plugin message
+```
+
+The plugin binary is linked against glibc, while `grafana/grafana-oss` is
+Alpine-based and ships musl. Grafana closed the corresponding upstream report
+([grafana-image-renderer#475](https://github.com/grafana/grafana-image-renderer/issues/475))
+as *not planned*, so there is no fix to wait for. Two options work:
+
+| Option | How | Trade-off |
+| --- | --- | --- |
+| Ubuntu image variant | Set `VERSION=latest-ubuntu` (build arg / Railway variable) | glibc-compatible, single service — but a noticeably larger image and rendering competes with Grafana for the same CPU/memory |
+| Separate renderer service | Deploy `grafana/grafana-image-renderer` as its own Railway service, then point Grafana at it via `GF_RENDERING_SERVER_URL=http://<service>:8081/render` and `GF_RENDERING_CALLBACK_URL=http://<grafana-service>:3000/` | Scales independently and keeps Chromium out of the Grafana container — but a second service to run and pay for |
+
+For anything beyond occasional PDF or panel exports, the separate service is the
+better fit: rendering is CPU- and memory-spiky, and isolating it keeps those
+spikes away from the dashboards themselves.
+
 ## 🐍 How to Deploy
 
 1. Click Deploy on Railway and setup your credentials in the environment variables
