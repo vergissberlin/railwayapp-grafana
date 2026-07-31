@@ -1,11 +1,11 @@
-# AGENT.md
+# AGENTS.md
 
 ## Purpose
 This file defines template-specific agent conventions for this Railway app.
 
 ## Scope
 These rules apply to `railwayapp-grafana`.
-The workspace root `AGENT.md` also applies.
+The workspace root `AGENTS.md` also applies.
 
 ## Conventions
 - Use `pnpm` as the default package manager when package management is needed.
@@ -18,4 +18,3 @@ The workspace root `AGENT.md` also applies.
 - Keep `railway.toml` consistent with runtime behavior.
 - Validate `startCommand`, `healthcheckPath`, and `healthcheckTimeout` after changes.
 - Keep Docker and entrypoint changes minimal and reproducible.
-
