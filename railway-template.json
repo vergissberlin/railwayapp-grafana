@@ -8,7 +8,7 @@
   "image": "https://raw.githubusercontent.com/vergissberlin/railwayapp-grafana/main/template-header.svg",
   "description": "Deploy Grafana dashboards on Railway for metrics and observability.",
   "workspaceAutomation": false,
-  "logoFile": "railwayapp-grafana.png",
+  "logoFile": "logo-grafana.png",
   "badge": {
     "label": "Grafana",
     "color": "F46800",
