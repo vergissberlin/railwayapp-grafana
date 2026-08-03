@@ -24,6 +24,53 @@ Long-form template copy for Railway (description / **Deploy and Host** sections)
 * Keep healthcheck path at `/api/health`
 * Restrict plugin list in `GF_INSTALL_PLUGINS` to required plugins only
 
+## 💾 Volume permissions
+
+Railway mounts volumes as `root:root`, while the upstream Grafana image runs as
+UID 472. A plain `grafana/grafana-oss` deployment therefore fails on first boot
+with:
+
+```log
+mkdir: can't create directory '/var/lib/grafana/plugins': Permission denied
+GF_PATHS_DATA='/var/lib/grafana' is not writable.
+```
+
+This template handles it in [`docker-entrypoint.sh`](docker-entrypoint.sh): the
+container starts as root, takes ownership of the mount, and then `exec`s into
+UID 472. Since it is an `exec` rather than a fork, no root process survives into
+runtime — the Grafana process itself stays unprivileged.
+
+You do **not** need to set `RAILWAY_RUN_UID=0`. That variable is the common
+workaround for this class of error, but it leaves Grafana running as root for the
+entire lifetime of the container.
+
+The recursive `chown` only runs when the mount root is still misowned, so it
+costs one pass on the first boot after attaching a volume and nothing on
+subsequent restarts.
+
+## 🖼️ Image rendering (`grafana-image-renderer`)
+
+Adding `grafana-image-renderer` to `GF_INSTALL_PLUGINS` does **not** work on the
+default image and fails at startup with `exit status 127`:
+
+```log
+Error: ✗ *rendering.RenderingService run error: Unrecognized remote plugin message
+```
+
+The plugin binary is linked against glibc, while `grafana/grafana-oss` is
+Alpine-based and ships musl. Grafana closed the corresponding upstream report
+([grafana-image-renderer#475](https://github.com/grafana/grafana-image-renderer/issues/475))
+as *not planned*, so there is no fix to wait for. Two options work:
+
+| Option | How | Trade-off |
+| --- | --- | --- |
+| Ubuntu image variant | Set `VERSION=latest-ubuntu` (build arg / Railway variable) | glibc-compatible, single service — but a noticeably larger image and rendering competes with Grafana for the same CPU/memory |
+| Separate renderer service | Deploy `grafana/grafana-image-renderer` as its own Railway service, then point Grafana at it via `GF_RENDERING_SERVER_URL=http://<service>:8081/render` and `GF_RENDERING_CALLBACK_URL=http://<grafana-service>:3000/` | Scales independently and keeps Chromium out of the Grafana container — but a second service to run and pay for |
+
+For anything beyond occasional PDF or panel exports, the separate service is the
+better fit: rendering is CPU- and memory-spiky, and isolating it keeps those
+spikes away from the dashboards themselves.
+
 ## 🐍 How to Deploy
 
 1. Click Deploy on Railway and setup your credentials in the environment variables
