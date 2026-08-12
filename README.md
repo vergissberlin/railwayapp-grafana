@@ -17,6 +17,15 @@ Long-form template copy for Railway (description / **Deploy and Host** sections)
 * Password Authentication (Set username & password in environment variables)
 * Railway config as code via `railway.toml`
 
+## 🏗️ Architecture
+
+```mermaid
+flowchart LR
+    Client(["🌐 Client"]) -->|HTTPS| Domain["Railway Public Domain"]
+    Domain -->|"$PORT → GF_SERVER_HTTP_PORT"| App["Container\ngrafana/grafana-oss"]
+    App --> Volume[("Volume\n/var/lib/grafana")]
+```
+
 ## Production recommendations (Railway)
 
 * Set strong `GF_SECURITY_ADMIN_PASSWORD` in Railway Variables
