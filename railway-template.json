@@ -5,7 +5,7 @@
   "repo": "vergissberlin/railwayapp-grafana",
   "displayName": "Grafana",
   "publishedCode": "grafana",
-  "image": "https://raw.githubusercontent.com/vergissberlin/railwayapp-grafana/main/template-header.svg",
+  "image": "https://raw.githubusercontent.com/vergissberlin/railwayapp-grafana/main/logo-grafana.png",
   "description": "Deploy Grafana dashboards on Railway for metrics and observability.",
   "workspaceAutomation": false,
   "logoFile": "logo-grafana.png",
