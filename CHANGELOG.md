@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.2.1](https://github.com/vergissberlin/railwayapp-grafana/compare/v0.2.0...v0.2.1) (2026-08-20)
+
+
+### Bug Fixes
+
+* point marketplace image at existing logo instead of banner ([7322674](https://github.com/vergissberlin/railwayapp-grafana/commit/73226745e1d78bd1a1b9cdc825fd943f977494c2))
+
+
+### Documentation
+
+* refresh shared template footer badges ([4c908c7](https://github.com/vergissberlin/railwayapp-grafana/commit/4c908c7e7e31a3cbd00628cb164ab954051b27d5))
+
+
+### Chores
+
+* update shared template footer ([69973b2](https://github.com/vergissberlin/railwayapp-grafana/commit/69973b2dbce4fce56a8be16b1aef5bc7a46525f8))
+* update shared template footer ([5a1d278](https://github.com/vergissberlin/railwayapp-grafana/commit/5a1d278d77976fed3cc2d3eac4100bc673019dd0))
+
 ## [0.2.0](https://github.com/vergissberlin/railwayapp-grafana/compare/v0.1.0...v0.2.0) (2026-08-14)
 
 
