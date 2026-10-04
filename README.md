@@ -31,7 +31,7 @@ flowchart LR
 * Set strong `GF_SECURITY_ADMIN_PASSWORD` in Railway Variables
 * Persist `/var/lib/grafana` with a Railway volume
 * Keep healthcheck path at `/api/health`
-* Restrict plugin list in `GF_INSTALL_PLUGINS` to required plugins only
+* Restrict plugin list in `GF_PLUGINS_PREINSTALL` to required plugins only
 
 ## 💾 Volume permissions
 
@@ -59,7 +59,7 @@ subsequent restarts.
 
 ## 🖼️ Image rendering (`grafana-image-renderer`)
 
-Adding `grafana-image-renderer` to `GF_INSTALL_PLUGINS` does **not** work on the
+Adding `grafana-image-renderer` to `GF_PLUGINS_PREINSTALL` does **not** work on the
 default image and fails at startup with `exit status 127`:
 
 ```log
@@ -88,7 +88,7 @@ spikes away from the dashboards themselves.
 GF_DEFAULT_INSTANCE_NAME=my-instance
 GF_SECURITY_ADMIN_USER=yourusername
 GF_SECURITY_ADMIN_PASSWORD=yourpassword
-GF_INSTALL_PLUGINS=grafana-piechart-panel,grafana-worldmap-panel,grafana-clock-panel,grafana-simple-json-datasource
+GF_PLUGINS_PREINSTALL=grafana-clock-panel
 GF_LOG_MODE=console
 GF_VERSION=latest
 PORT=3000

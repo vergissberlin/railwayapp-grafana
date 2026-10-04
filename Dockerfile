@@ -2,8 +2,11 @@ ARG VERSION=latest
 
 FROM grafana/grafana-oss:${VERSION}
 
+# grafana-piechart-panel, grafana-worldmap-panel and grafana-simple-json-datasource are Angular plugins; Grafana 11+ refuses to
+# load them ("angular plugins are not supported"), so only Angular-free plugins are preinstalled.
+# GF_INSTALL_PLUGINS is deprecated in favour of GF_PLUGINS_PREINSTALL.
 ENV \
-    GF_INSTALL_PLUGINS=grafana-piechart-panel,grafana-worldmap-panel,grafana-clock-panel,grafana-simple-json-datasource
+    GF_PLUGINS_PREINSTALL=grafana-clock-panel
 
 # The entrypoint needs root to fix ownership of the Railway volume before
 # handing over to UID 472. Installing packages requires root as well.
