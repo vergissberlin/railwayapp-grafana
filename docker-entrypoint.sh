@@ -18,6 +18,11 @@ GF_GID=0
 GF_PATHS_DATA="${GF_PATHS_DATA:-/var/lib/grafana}"
 GF_PATHS_PLUGINS="${GF_PATHS_PLUGINS:-${GF_PATHS_DATA}/plugins}"
 
+# The Railway template asks for an instance name; fall back to a sane default
+# so an empty value never leaves Grafana without one.
+GF_DEFAULT_INSTANCE_NAME="${GF_DEFAULT_INSTANCE_NAME:-Grafana}"
+export GF_DEFAULT_INSTANCE_NAME
+
 # Railway injects PORT; Grafana expects GF_SERVER_HTTP_PORT. An explicitly
 # configured GF_SERVER_HTTP_PORT always wins.
 GF_SERVER_HTTP_PORT="${GF_SERVER_HTTP_PORT:-${PORT:-3000}}"
