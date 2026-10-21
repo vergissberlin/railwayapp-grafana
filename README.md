@@ -73,7 +73,7 @@ as *not planned*, so there is no fix to wait for. Two options work:
 
 | Option | How | Trade-off |
 | --- | --- | --- |
-| Ubuntu image variant | Set `VERSION=latest-ubuntu` (build arg / Railway variable) | glibc-compatible, single service — but a noticeably larger image and rendering competes with Grafana for the same CPU/memory |
+| Ubuntu image variant | Set `VERSION=13.0.2-ubuntu` (matching the pinned version) (build arg / Railway variable) | glibc-compatible, single service — but a noticeably larger image and rendering competes with Grafana for the same CPU/memory |
 | Separate renderer service | Deploy `grafana/grafana-image-renderer` as its own Railway service, then point Grafana at it via `GF_RENDERING_SERVER_URL=http://<service>:8081/render` and `GF_RENDERING_CALLBACK_URL=http://<grafana-service>:3000/` | Scales independently and keeps Chromium out of the Grafana container — but a second service to run and pay for |
 
 For anything beyond occasional PDF or panel exports, the separate service is the
