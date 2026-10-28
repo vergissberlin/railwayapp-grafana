@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/vergissberlin/railwayapp-grafana/compare/v0.2.3...v0.3.0) (2026-10-28)
+
+
+### Features
+
+* quiet first-boot migration logs and document resource requirements ([#20](https://github.com/vergissberlin/railwayapp-grafana/issues/20)) ([ca92269](https://github.com/vergissberlin/railwayapp-grafana/commit/ca92269d6a51303dbfc94b255976c672f741ac83))
+
 ## [0.2.3](https://github.com/vergissberlin/railwayapp-grafana/compare/v0.2.2...v0.2.3) (2026-10-28)
 
 
