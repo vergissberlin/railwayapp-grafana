@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.1](https://github.com/vergissberlin/railwayapp-grafana/compare/v0.3.0...v0.3.1) (2026-10-28)
+
+
+### Documentation
+
+* use SERVICE_NAME placeholders instead of &lt;...&gt; in README ([#22](https://github.com/vergissberlin/railwayapp-grafana/issues/22)) ([56972b0](https://github.com/vergissberlin/railwayapp-grafana/commit/56972b05c8d9394d70ee07d314f6fd59e906e01e))
+
 ## [0.3.0](https://github.com/vergissberlin/railwayapp-grafana/compare/v0.2.3...v0.3.0) (2026-10-28)
 
 
