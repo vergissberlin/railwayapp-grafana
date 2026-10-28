@@ -22,6 +22,18 @@ RUN if command -v apk >/dev/null 2>&1; then \
         rm -rf /var/lib/apt/lists/*; \
     fi
 
+# Grafana 13 ships some data sources (e.g. Elasticsearch) as bundled plugins in
+# /usr/share/grafana/data/plugins-bundled and auto-updates them on startup. The
+# upstream image leaves that tree owned by root, so the update fails with
+# "unlinkat .../plugin.json: permission denied" after the old plugin process has
+# already been stopped, leaving the data source unregistered. Hand the tree to
+# UID 472 / GID 0 (same fix as grafana/grafana#127770). This only touches the
+# image, never the /var/lib/grafana volume.
+RUN if [ -d /usr/share/grafana/data/plugins-bundled ]; then \
+        chown -R 472:0 /usr/share/grafana/data/plugins-bundled && \
+        chmod -R ug+rwX /usr/share/grafana/data/plugins-bundled; \
+    fi
+
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
