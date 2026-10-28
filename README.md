@@ -117,6 +117,10 @@ docker compose up -d
 
 Connect to http://localhost:3000 use setup username & password from docker-compose file to login to grafana.
 
+## 💬 Support
+
+Questions or feedback? Visit the [template forum on Railway Central Station](https://station.railway.com/templates/grafana-c0196bc3).
+
 <!-- footer -->
 ---
 
