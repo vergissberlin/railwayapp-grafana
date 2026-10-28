@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.2.3](https://github.com/vergissberlin/railwayapp-grafana/compare/v0.2.2...v0.2.3) (2026-10-28)
+
+
+### Bug Fixes
+
+* let Grafana auto-update bundled plugins such as Elasticsearch ([#19](https://github.com/vergissberlin/railwayapp-grafana/issues/19)) ([c1f0d7a](https://github.com/vergissberlin/railwayapp-grafana/commit/c1f0d7a4e1ade30613464d0b4ad3c0c3958457f9))
+
+
+### Documentation
+
+* fix Railway deploy button link and add template forum link ([#17](https://github.com/vergissberlin/railwayapp-grafana/issues/17)) ([0e4b0f2](https://github.com/vergissberlin/railwayapp-grafana/commit/0e4b0f20d77e52e9bd0ac12bc55fb87cd8be2148))
+
 ## [0.2.2](https://github.com/vergissberlin/railwayapp-grafana/compare/v0.2.1...v0.2.2) (2026-10-21)
 
 
