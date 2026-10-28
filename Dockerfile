@@ -5,8 +5,14 @@ FROM grafana/grafana-oss:${VERSION}
 # grafana-piechart-panel, grafana-worldmap-panel and grafana-simple-json-datasource are Angular plugins; Grafana 11+ refuses to
 # load them ("angular plugins are not supported"), so only Angular-free plugins are preinstalled.
 # GF_INSTALL_PLUGINS is deprecated in favour of GF_PLUGINS_PREINSTALL.
+#
+# GF_LOG_FILTERS=migrator:warn: the first boot runs ~700 SQLite migrations and
+# logs each one at info level. On Railway that burst hits the log rate limit
+# ("Messages dropped"), which can hide real errors. Migration warnings/errors
+# still show up. Override via a Railway variable (e.g. migrator:info).
 ENV \
-    GF_PLUGINS_PREINSTALL=grafana-clock-panel
+    GF_PLUGINS_PREINSTALL=grafana-clock-panel \
+    GF_LOG_FILTERS=migrator:warn
 
 # The entrypoint needs root to fix ownership of the Railway volume before
 # handing over to UID 472. Installing packages requires root as well.

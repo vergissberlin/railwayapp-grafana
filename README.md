@@ -8,8 +8,6 @@ Grafana is a multi-platform, feature rich metrics dashboard and graph editor for
 
 [![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/deploy/grafana?referralCode=2_sIT9&utm_medium=integration&utm_source=template&utm_campaign=generic)
 
-Long-form template copy for Railway (description / **Deploy and Host** sections): [RAILWAY.md](RAILWAY.md).
-
 ## ✨ Features
 
 * Grafana with automated setup
@@ -33,6 +31,18 @@ flowchart LR
 * Keep healthcheck path at `/api/health`
 * Restrict plugin list in `GF_PLUGINS_PREINSTALL` to required plugins only
 
+## 📏 Resource requirements
+
+Measured on a fresh deploy of Grafana 13.0.2:
+
+* **RAM:** ~0.3 GB peak on first boot, ~0.27 GB idle
+* **Volume:** ~0.25 GB right after first boot; grows with dashboards, alert state and plugin updates. Plan for **≥ 0.5 GB**
+* **Plan:** Hobby or higher recommended. Free and Trial cap RAM (0.5 GB / 1 GB) and volumes (0.5 GB); a full volume or memory spike crashes Grafana
+
+## 📜 Logging
+
+The first boot runs ~700 database migrations. The image sets `GF_LOG_FILTERS=migrator:warn` so they don't trip Railway's log rate limit; warnings and errors stay visible. Override it in Railway Variables, e.g. `GF_LOG_FILTERS=migrator:info` for full migration logs.
+
 ## 💾 Volume permissions
 
 Railway mounts volumes as `root:root`, while the upstream Grafana image runs as
@@ -49,13 +59,9 @@ container starts as root, takes ownership of the mount, and then `exec`s into
 UID 472. Since it is an `exec` rather than a fork, no root process survives into
 runtime — the Grafana process itself stays unprivileged.
 
-You do **not** need to set `RAILWAY_RUN_UID=0`. That variable is the common
-workaround for this class of error, but it leaves Grafana running as root for the
-entire lifetime of the container.
-
-The recursive `chown` only runs when the mount root is still misowned, so it
-costs one pass on the first boot after attaching a volume and nothing on
-subsequent restarts.
+You do **not** need `RAILWAY_RUN_UID=0`, which would keep Grafana running as
+root. The recursive `chown` only runs while the mount root is misowned, i.e. once
+after attaching a volume.
 
 ## 🖼️ Image rendering (`grafana-image-renderer`)
 
@@ -90,7 +96,6 @@ GF_SECURITY_ADMIN_USER=yourusername
 GF_SECURITY_ADMIN_PASSWORD=yourpassword
 GF_PLUGINS_PREINSTALL=grafana-clock-panel
 GF_LOG_MODE=console
-GF_VERSION=latest
 PORT=3000
 ```
 
@@ -99,10 +104,9 @@ PORT=3000
 
 ## 👩‍💻 How to Use
 
-1. When you configure your Grafana connection, use your custom URL as the host.
-2. Use the token in the environment variables to authenticate
-3. Setup bucket name and organization name in the environment variables
-4. Use grafana version 2.0 or above
+1. Log in with `GF_SECURITY_ADMIN_USER` / `GF_SECURITY_ADMIN_PASSWORD`
+2. Add a data source (Prometheus, Loki, InfluxDB, PostgreSQL, …) via its Railway private domain
+3. Build dashboards and alerts; everything is persisted on the volume
 
 ## 🪲 Bug Reporting
 
